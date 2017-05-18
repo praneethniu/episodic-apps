@@ -47,5 +47,6 @@ public class EpisodeWithTitle {
         setId(episode.getId());
         setEpisodeNumber(episode.getEpisodeNumber());
         setSeasonNumber(episode.getSeasonNumber());
+      setTitle("S" + episode.getSeasonNumber() + " " + "E" + episode.getEpisodeNumber());
     }
 }

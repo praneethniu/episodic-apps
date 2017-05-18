@@ -29,7 +29,6 @@ public class EpisodicController {
                 .map(episode -> {
                     EpisodeWithTitle title = new EpisodeWithTitle();
                     title.setEpisode(episode);
-                    title.setTitle("S" + episode.getSeasonNumber() + " " + "E" + episode.getEpisodeNumber());
                     return title;
                 })
                 .collect(toList());
@@ -44,7 +43,6 @@ public class EpisodicController {
 
         EpisodeWithTitle episodeWithTitle = new EpisodeWithTitle();
         episodeWithTitle.setEpisode(episode);
-        episodeWithTitle.setTitle("S" + episode.getSeasonNumber() + " " + "E" + episode.getEpisodeNumber());
         return episodeWithTitle;
     }
 }
