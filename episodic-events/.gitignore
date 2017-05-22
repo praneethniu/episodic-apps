@@ -15,9 +15,6 @@
 *.iws
 *.iml
 *.ipr
-../.idea/
-*.idea/
-*.DS_Store/
 
 ### NetBeans ###
 nbproject/private/
