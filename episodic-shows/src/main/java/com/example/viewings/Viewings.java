@@ -15,10 +15,10 @@ public class Viewings {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private Long user_id;
-    private Long show_id;
-    private Long episode_id;
-    private Timestamp updated_at;
+    private Long userId;
+    private Long showId;
+    private Long episodeId;
+    private Timestamp updatedAt;
     private Integer timecode;
 
     public Long getId() {
@@ -29,36 +29,36 @@ public class Viewings {
         this.id = id;
     }
 
-    public Long getUser_id() {
-        return user_id;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setUser_id(Long user_id) {
-        this.user_id = user_id;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
-    public Long getShow_id() {
-        return show_id;
+    public Long getShowId() {
+        return showId;
     }
 
-    public void setShow_id(Long show_id) {
-        this.show_id = show_id;
+    public void setShowId(Long showId) {
+        this.showId = showId;
     }
 
-    public Long getEpisode_id() {
-        return episode_id;
+    public Long getEpisodeId() {
+        return episodeId;
     }
 
-    public void setEpisode_id(Long episode_id) {
-        this.episode_id = episode_id;
+    public void setEpisodeId(Long episodeId) {
+        this.episodeId = episodeId;
     }
 
-    public Timestamp getUpdated_at() {
-        return updated_at;
+    public Timestamp getUpdatedAt() {
+        return updatedAt;
     }
 
-    public void setUpdated_at(Timestamp updated_at) {
-        this.updated_at = updated_at;
+    public void setUpdatedAt(Timestamp updatedAt) {
+        this.updatedAt = updatedAt;
     }
 
     public Integer getTimecode() {

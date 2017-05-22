@@ -4,7 +4,6 @@ import com.example.shows.Episode;
 import com.example.shows.EpisodeRepository;
 import com.example.users.User;
 import com.example.users.UserRepository;
-import com.example.viewings.ViewingsRepository;
 import com.example.shows.Show;
 import com.example.shows.ShowRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -19,6 +18,7 @@ import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
+import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 
 import javax.transaction.Transactional;
 import java.sql.Timestamp;
@@ -35,7 +35,6 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -153,11 +152,11 @@ public class ViewingsControllerTest {
 
 
         Viewings viewings = new Viewings();
-        viewings.setEpisode_id(episodes.get(0).getId());
-        viewings.setUpdated_at(new Timestamp(12));
+        viewings.setEpisodeId(episodes.get(0).getId());
+        viewings.setUpdatedAt(new Timestamp(12));
         viewings.setTimecode(10);
-        viewings.setShow_id(shows.get(0).getId());
-        viewings.setUser_id(users.get(0).getId());
+        viewings.setShowId(shows.get(0).getId());
+        viewings.setUserId(users.get(0).getId());
         viewingsRepository.save(viewings);
 
 
@@ -167,6 +166,7 @@ public class ViewingsControllerTest {
 
         mvc.perform(request)
                 .andExpect(status().isOk())
+                .andDo(MockMvcResultHandlers.print())
                 .andExpect(jsonPath("$[0].show.id", notNullValue()))
                 .andExpect(jsonPath("$[0].show.name", equalTo("friends show")))
                 .andExpect(jsonPath("$[0].episode.id", notNullValue()))

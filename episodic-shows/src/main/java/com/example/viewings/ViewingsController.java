@@ -37,11 +37,11 @@ public class ViewingsController {
                     ViewingResponse response = new ViewingResponse();
 
                     response.setTimecode(viewing.getTimecode());
-                    response.setUpdatedAt(viewing.getUpdated_at());
-                    Show show = fetchShow(viewing.getShow_id());
+                    response.setUpdatedAt(viewing.getUpdatedAt());
+                    Show show = fetchShow(viewing.getShowId());
                     response.setShow(show);
 
-                    Episode episode = fetchEpisode(viewing.getEpisode_id());
+                    Episode episode = fetchEpisode(viewing.getEpisodeId());
 
                     EpisodeWithTitle episodeWithTitle = new EpisodeWithTitle();
                     episodeWithTitle.setEpisode(episode);
@@ -62,10 +62,10 @@ public class ViewingsController {
                                     @PathVariable Long id) {
 
         Viewings viewings = new Viewings();
-        viewings.setUser_id(id);
-        viewings.setEpisode_id(request.getEpisodeId());
-        viewings.setShow_id(fetchEpisode(request.getEpisodeId()).getShow_id());
-        viewings.setUpdated_at(request.getUpdatedAt());
+        viewings.setUserId(id);
+        viewings.setEpisodeId(request.getEpisodeId());
+        viewings.setShowId(fetchEpisode(request.getEpisodeId()).getShow_id());
+        viewings.setUpdatedAt(request.getUpdatedAt());
         viewings.setTimecode(request.getTimecode());
         viewingsRepository.save(viewings);
 
