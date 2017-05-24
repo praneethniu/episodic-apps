@@ -3,7 +3,7 @@ package com.example.viewings;
 import com.example.shows.EpisodeWithTitle;
 import com.example.shows.Show;
 
-import java.sql.Timestamp;
+import java.util.Date;
 
 /**
  * Created by trainer5 on 5/18/17.
@@ -11,7 +11,7 @@ import java.sql.Timestamp;
 public class ViewingResponse {
     private Show show;
     private EpisodeWithTitle episode;
-    private Timestamp updatedAt;
+    private Date updatedAt;
     private Integer timecode;
 
     public Show getShow() {
@@ -30,11 +30,11 @@ public class ViewingResponse {
         this.episode = episode;
     }
 
-    public Timestamp getUpdatedAt() {
+    public Date getUpdatedAt() {
         return updatedAt;
     }
 
-    public void setUpdatedAt(Timestamp updatedAt) {
+    public void setUpdatedAt(Date updatedAt) {
         this.updatedAt = updatedAt;
     }
 

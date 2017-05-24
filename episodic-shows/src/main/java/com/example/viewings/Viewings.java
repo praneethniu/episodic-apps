@@ -4,7 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import java.sql.Timestamp;
+import java.util.Date;
 
 /**
  * Created by trainer5 on 5/18/17.
@@ -18,7 +18,7 @@ public class Viewings {
     private Long userId;
     private Long showId;
     private Long episodeId;
-    private Timestamp updatedAt;
+    private Date updatedAt;
     private Integer timecode;
 
     public Long getId() {
@@ -53,11 +53,11 @@ public class Viewings {
         this.episodeId = episodeId;
     }
 
-    public Timestamp getUpdatedAt() {
+    public Date getUpdatedAt() {
         return updatedAt;
     }
 
-    public void setUpdatedAt(Timestamp updatedAt) {
+    public void setUpdatedAt(Date updatedAt) {
         this.updatedAt = updatedAt;
     }
 

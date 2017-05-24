@@ -5,6 +5,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
+import java.util.Date;
+
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "type", visible = true)
 @JsonSubTypes({
         @JsonSubTypes.Type(value = PlayEvent.class, name = "play"),
@@ -18,14 +20,14 @@ public class Event {
     private Long userId;
     private Long showId;
     private Long episodeId;
-    private String createdAt;
+    private Date createdAt;
 
     @JsonCreator
     public Event(
             @JsonProperty("userId") Long userId,
             @JsonProperty("showId") Long showId,
             @JsonProperty("episodeId") Long episodeId,
-            @JsonProperty("createdAt") String createdAt
+            @JsonProperty("createdAt") Date createdAt
             ) {
         this.userId = userId;
         this.showId = showId;
@@ -45,7 +47,7 @@ public class Event {
         return episodeId;
     }
 
-    public String getCreatedAt() {
+    public Date getCreatedAt() {
         return createdAt;
     }
 }

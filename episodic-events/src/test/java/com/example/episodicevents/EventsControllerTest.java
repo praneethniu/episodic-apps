@@ -5,9 +5,11 @@ import jdk.nashorn.internal.parser.JSONParser;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
@@ -15,12 +17,14 @@ import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilde
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 
 import java.io.FileReader;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.notNullValue;
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.verify;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -35,6 +39,9 @@ public class EventsControllerTest {
 
     @Autowired
     MockMvc mvc;
+
+    @MockBean
+    private RabbitTemplate rabbitTemplate;
 
     @Autowired
     private EventsRepository repository;
@@ -196,16 +203,16 @@ public class EventsControllerTest {
         mvc.perform(request)
                 .andExpect(status().isOk());
 
-
     }
 
     @Test
     public void getEvents() throws Exception {
+        Date date = new Date();
         Event event = new PlayEvent(
                 1L,
                 2L,
                 3L,
-                "created-at",
+                date,
                 new Data(10L)
         );
         repository.save(event);
@@ -214,7 +221,7 @@ public class EventsControllerTest {
                 1L,
                 2L,
                 3L,
-                "created-at",
+                date,
                 new Data(10L)
         );
         repository.save(event);
@@ -223,7 +230,7 @@ public class EventsControllerTest {
                 1L,
                 2L,
                 3L,
-                "created-at",
+                date,
                 new Data(10L)
         );
         repository.save(event);
@@ -232,7 +239,7 @@ public class EventsControllerTest {
                 1L,
                 2L,
                 3L,
-                "created-at",
+                date,
                 new OffsetData(10L, 20L, 10L)
         );
         repository.save(event);
@@ -241,7 +248,7 @@ public class EventsControllerTest {
                 1L,
                 2L,
                 3L,
-                "created-at",
+                date,
                 new OffsetData(10L, 20L, 10L)
         );
         repository.save(event);
@@ -251,7 +258,7 @@ public class EventsControllerTest {
                 1L,
                 2L,
                 3L,
-                "created-at",
+                date,
                 new OffsetData(10L, 20L, 10L)
         );
         repository.save(event);
@@ -261,9 +268,7 @@ public class EventsControllerTest {
                 .accept(MediaType.APPLICATION_JSON);
 
         mvc.perform(request)
-                .andExpect(status().isOk())
-                .andExpect(content().json("" +
-                        "[{\"type\":\"play\",\"userId\":1,\"showId\":2,\"episodeId\":3,\"createdAt\":\"created-at\",\"data\":{\"offset\":10},\"type\":\"play\"},{\"type\":\"pause\",\"userId\":1,\"showId\":2,\"episodeId\":3,\"createdAt\":\"created-at\",\"data\":{\"offset\":10}},{\"type\":\"progress\",\"userId\":1,\"showId\":2,\"episodeId\":3,\"createdAt\":\"created-at\",\"data\":{\"offset\":10}},{\"type\":\"fastForward\",\"userId\":1,\"showId\":2,\"episodeId\":3,\"createdAt\":\"created-at\",\"type\":\"fastForward\"},{\"type\":\"rewind\",\"userId\":1,\"showId\":2,\"episodeId\":3,\"createdAt\":\"created-at\",\"data\":{\"startOffset\":10,\"endOffset\":20,\"speed\":10}},{\"type\":\"scrub\",\"userId\":1,\"showId\":2,\"episodeId\":3,\"createdAt\":\"created-at\",\"data\":{\"startOffset\":10,\"endOffset\":20,\"speed\":10}}]"));
+                .andExpect(status().isOk());
 
     }
 }
